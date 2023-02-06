@@ -3,6 +3,10 @@ package com.example.endcase.pojo;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Relationship;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Node
 public class Person {
@@ -13,6 +17,9 @@ public class Person {
     private String name;
 
     private Long born;
+
+    @Relationship(type = "ACTED_IN", direction = Relationship.Direction.OUTGOING)
+    private Set<Movie> actedInMovie = new HashSet<>();
 
     public Person() {
         // Empty constructor required as of Neo4j API 2.0.5 需要一个空的构造器
